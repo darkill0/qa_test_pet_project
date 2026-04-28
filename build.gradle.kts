@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("io.qameta.allure") version "3.0.1"
 }
 
 group = "org.example"
@@ -13,8 +14,15 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    testImplementation("io.rest-assured:rest-assured:5.3.0")
+    testImplementation("com.fasterxml.jackson.core:jackson-databind:2.21.2")
+
+    testImplementation("io.qameta.allure:allure-junit5:2.25.0")
+    testImplementation("io.qameta.allure:allure-rest-assured:2.25.0")
 }
 
 tasks.test {
     useJUnitPlatform()
+    systemProperty("allure.results.directory", "build/allure-results")
 }
