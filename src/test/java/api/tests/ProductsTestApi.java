@@ -1,9 +1,9 @@
 package api.tests;
 
 import api.pojo.ProductPojo;
+import api.tests.StepsProductTest.ProductSteps;
 import config.RestApiSpecifications;
 import io.qameta.allure.*;
-import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.*;
 import java.util.List;
 
 import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.notNullValue;
@@ -21,11 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Feature("API test products")
 public class ProductsTestApi {
 
+    private static ProductSteps productSteps;
     @BeforeAll
     public static void setUp()
     {
         RestAssured.reset();
         RestApiSpecifications.requestSpec();
+        productSteps = new ProductSteps();
     }
 
     @Test
@@ -100,4 +103,20 @@ public class ProductsTestApi {
                 .when().get("products/100")
                 .then().spec(RestApiSpecifications.responseSpecCustom(404)).log().all();
     }
+
+    @Test
+    @Severity(NORMAL)
+    @DisplayName("Проверка сортировки данных по годам")
+    @Owner("Ilya Koltsov")
+    @Description("Получение данных о товаров и проверка что они отдаются в отсортированном формате по годам")
+    public void getProductsAndCheckSorted()
+    {
+        List<ProductPojo> products = productSteps.getProducts();
+        List<ProductPojo> sortedProducts = productSteps.createSortedList(products);
+        Allure.step("Сравнение полученных списков", () -> {
+            Assertions.assertEquals(sortedProducts, products);
+        });
+
+    }
+
 }

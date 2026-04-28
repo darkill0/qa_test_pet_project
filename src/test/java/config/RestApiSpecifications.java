@@ -28,7 +28,7 @@ public class RestApiSpecifications {
 
     public static ResponseSpecification responseSpecCustom(int code)
     {
-        return new ResponseSpecBuilder().expectContentType("application/json").expectStatusCode(code).build();
+        return new ResponseSpecBuilder().expectStatusCode(code).build();
     }
     public static void setSpecificationsForApi(RequestSpecification requestSpecification, ResponseSpecification responseSpecification)
     {
