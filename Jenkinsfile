@@ -2,15 +2,15 @@ pipeline{
     agent any
 
     tools {
-        jdk 'openjdk25'
+        jdk 'jdk17'
     }
 
-    enviroment {
+    environment  {
         GRADLE_OPTS = "-Dorg.gradle.daemon=false"
     }
 
     stages {
-        stage("Checkout from GiyHUb"){
+        stage("Checkout from GitHUb"){
             steps {
                 get branch: 'main',
                     url: 'git@github.com:darkill0/qa_test_pet_project.git',
