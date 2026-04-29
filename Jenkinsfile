@@ -12,7 +12,7 @@ pipeline{
     stages {
         stage("Checkout from GitHUb"){
             steps {
-                get branch: 'main',
+                git branch: 'main',
                     url: 'git@github.com:darkill0/qa_test_pet_project.git',
                         credentialsId: 'github-ssh-key'
             }
