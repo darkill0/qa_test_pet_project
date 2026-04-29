@@ -2,7 +2,7 @@ package api.tests;
 
 import api.pojo.ProductPojo;
 import api.tests.StepsProductTest.ProductSteps;
-import config.RestApiSpecifications;
+import config.api.RestApiSpecifications;
 import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

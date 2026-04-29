@@ -20,6 +20,10 @@ dependencies {
 
     testImplementation("io.qameta.allure:allure-junit5:2.25.0")
     testImplementation("io.qameta.allure:allure-rest-assured:2.25.0")
+    // Source: https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide
+    implementation("io.qameta.allure:allure-selenide:2.25.0")
+    // Source: https://mvnrepository.com/artifact/com.codeborne/selenide
+    implementation("com.codeborne:selenide:7.16.0")
 }
 
 tasks.test {

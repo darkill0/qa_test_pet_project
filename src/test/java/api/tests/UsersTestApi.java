@@ -1,15 +1,13 @@
 package api.tests;
 
 import api.pojo.RegisterPojo;
-import api.pojo.UserPojo;
 import api.tests.StepsUsersTest.UsersSteps;
-import config.RestApiSpecifications;
+import config.api.RestApiSpecifications;
 import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;

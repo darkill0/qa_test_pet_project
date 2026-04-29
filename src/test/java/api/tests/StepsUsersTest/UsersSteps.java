@@ -2,13 +2,11 @@ package api.tests.StepsUsersTest;
 
 import api.pojo.RegisterPojo;
 import api.pojo.UserPojo;
-import config.RestApiSpecifications;
+import config.api.RestApiSpecifications;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.List;
