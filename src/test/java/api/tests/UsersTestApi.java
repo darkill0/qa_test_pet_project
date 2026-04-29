@@ -14,7 +14,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 @DisplayName("[API] Набор тестов для работы с пользователями")
-@Tag(value = "Api тест работы с пользователями")
+@Tag(value = "api_users")
 @Epic("Users API")
 @Feature("Users management")
 public class UsersTestApi {
