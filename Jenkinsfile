@@ -21,6 +21,7 @@ pipeline{
         stage("Run Users Tests")
                 {
                     steps{
+                        sh 'chmod +x gradlew'
                         sh './gradlew clean test -Dtag=api_users'
                     }
                 }
