@@ -1,7 +1,7 @@
-package api.tests.StepsProductTest;
+package reqres.api.tests.StepsProductTest;
 
-import api.pojo.ProductPojo;
 import io.qameta.allure.Step;
+import reqres.api.pojo.ProductPojo;
 
 import java.util.Comparator;
 import java.util.List;

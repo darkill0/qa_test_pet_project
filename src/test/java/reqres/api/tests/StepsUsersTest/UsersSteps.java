@@ -1,12 +1,12 @@
-package api.tests.StepsUsersTest;
+package reqres.api.tests.StepsUsersTest;
 
-import api.pojo.RegisterPojo;
-import api.pojo.UserPojo;
 import config.api.RestApiSpecifications;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
+import reqres.api.pojo.RegisterPojo;
+import reqres.api.pojo.UserPojo;
 
 import java.util.HashMap;
 import java.util.List;

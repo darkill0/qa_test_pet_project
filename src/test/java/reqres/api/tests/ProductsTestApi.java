@@ -1,12 +1,12 @@
-package api.tests;
+package reqres.api.tests;
 
-import api.pojo.ProductPojo;
-import api.tests.StepsProductTest.ProductSteps;
 import config.api.RestApiSpecifications;
 import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
+import reqres.api.pojo.ProductPojo;
+import reqres.api.tests.StepsProductTest.ProductSteps;
 
 import java.util.List;
 
