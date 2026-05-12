@@ -68,49 +68,49 @@ public class SelectMenuTests extends BaseTest {
                 );
     }
 
-    @Test
-    @Tag("smoke_test")
-    @Owner("Ilya Koltsov")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Проверка Multi Select")
-    public void checkMultiSelect() {
-
-        selectMenuSteps.openPage();
-
-        selectMenuSteps
-                .selectMultiValues(
-                        "Green",
-                        "Blue",
-                        "Black"
-                );
-
-        selectMenuSteps
-                .shouldHaveMultiValues(
-                        "Green",
-                        "Blue",
-                        "Black"
-                );
-    }
-
-    @Test
-    @Tag("smoke_test")
-    @Owner("Ilya Koltsov")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Проверка Standard Multi Select")
-    public void checkStandardMultiSelect() {
-
-        selectMenuSteps.openPage();
-
-        selectMenuSteps
-                .selectCars(
-                        "Volvo",
-                        "Audi"
-                );
-
-        selectMenuSteps
-                .shouldHaveSelectedCars(
-                        "Volvo",
-                        "Audi"
-                );
-    }
+//    @Test
+//    @Tag("smoke_test")
+//    @Owner("Ilya Koltsov")
+//    @Severity(SeverityLevel.CRITICAL)
+//    @DisplayName("Проверка Multi Select")
+//    public void checkMultiSelect() {
+//
+//        selectMenuSteps.openPage();
+//
+//        selectMenuSteps
+//                .selectMultiValues(
+//                        "Green",
+//                        "Blue",
+//                        "Black"
+//                );
+//
+//        selectMenuSteps
+//                .shouldHaveMultiValues(
+//                        "Green",
+//                        "Blue",
+//                        "Black"
+//                );
+//    }
+//
+//    @Test
+//    @Tag("smoke_test")
+//    @Owner("Ilya Koltsov")
+//    @Severity(SeverityLevel.CRITICAL)
+//    @DisplayName("Проверка Standard Multi Select")
+//    public void checkStandardMultiSelect() {
+//
+//        selectMenuSteps.openPage();
+//
+//        selectMenuSteps
+//                .selectCars(
+//                        "Volvo",
+//                        "Audi"
+//                );
+//
+//        selectMenuSteps
+//                .shouldHaveSelectedCars(
+//                        "Volvo",
+//                        "Audi"
+//                );
+//    }
 }

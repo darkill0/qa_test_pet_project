@@ -9,7 +9,9 @@ public class TestConfig {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         Configuration.browser = "chrome";
+
         Configuration.browserCapabilities = options;
+        Configuration.browserSize = "1920x1080";
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 20000;
         Configuration.headless = false;
