@@ -31,12 +31,16 @@ dependencies {
     implementation("com.codeborne:selenide:7.16.0")
 }
 
+
 tasks.test {
     useJUnitPlatform()
 
     systemProperty(
         "allure.results.directory",
-        "build/allure-results"
+        System.getProperty(
+            "allure.results.directory",
+            "build/allure-results"
+        )
     )
 
     val includeTag = System.getProperty("tag")

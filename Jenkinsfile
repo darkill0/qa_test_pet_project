@@ -1,43 +1,86 @@
-pipeline{
+pipeline {
+
     agent any
 
     tools {
         jdk 'jdk17'
     }
 
+    options {
+        parallelsAlwaysFailFast()
+    }
+
     parameters {
+
         string(
                 name: 'TAGS',
-                defaultValue: 'smoke',
-                description: 'Enter one or multiple tags separated by comma. Example: smoke,regress,api'
+                defaultValue: 'smoke,api_users',
+                description: 'Enter tags separated by comma'
         )
     }
 
-    environment  {
-        TAG = "${params.TAGS}"
+    environment {
+        GRADLE_OPTS = "-Dorg.gradle.daemon=false"
     }
 
     stages {
-        stage("Checkout from GitHUb"){
+
+        stage('Checkout from GitHub') {
+
             steps {
+
                 git branch: 'main',
-                    url: 'git@github.com:darkill0/qa_test_pet_project.git',
+                        url: 'git@github.com:darkill0/qa_test_pet_project.git',
                         credentialsId: 'github-ssh-key'
             }
-
         }
-        stage('Run Tests') {
+
+        stage('Prepare Allure Directories') {
+
+            steps {
+
+                sh '''
+                    rm -rf build/allure-results
+                    mkdir -p build/allure-results
+                '''
+            }
+        }
+
+        stage('Run Parallel Tests') {
 
             steps {
 
                 script {
 
-                    echo "Running tags: ${TAG}"
+                    def tags = params.TAGS
+                            .split(',')
+                            .collect { it.trim() }
+                            .findAll { it }
 
-                    sh """
-                        chmod +x gradlew
-                        ./gradlew clean test -Dtag=${TAG}
-                    """
+                    echo "Selected tags: ${tags}"
+
+                    def parallelStages = [:]
+
+                    tags.each { currentTag ->
+
+                        parallelStages["Run ${currentTag}"] = {
+
+                            stage("Test ${currentTag}") {
+
+                                sh """
+                                    mkdir -p build/allure-results/${currentTag}
+
+                                    chmod +x gradlew
+
+                                    ./gradlew test \
+                                    -Dtag=${currentTag} \
+                                    -Dallure.results.directory=build/allure-results/${currentTag}
+                                """
+                            }
+                        }
+                    }
+
+                    parallel parallelStages
                 }
             }
         }
@@ -46,18 +89,35 @@ pipeline{
 
             steps {
 
-                allure([
-                        includeProperties: false,
-                        jdk: '',
-                        results: [[path: 'build/allure-results']]
-                ])
+                script {
+
+                    def tags = params.TAGS
+                            .split(',')
+                            .collect { it.trim() }
+                            .findAll { it }
+
+                    def allureResults = tags.collect {
+                        [path: "build/allure-results/${it}"]
+                    }
+
+                    allure(
+                            includeProperties: false,
+                            jdk: '',
+                            results: allureResults
+                    )
+                }
             }
         }
     }
 
-    post{
-        always{
-            archiveArtifacts artifacts: 'build/allure-results/**', allowEmptyArchive: true
+    post {
+
+        always {
+
+            archiveArtifacts(
+                    artifacts: 'build/allure-results/**/*',
+                    allowEmptyArchive: true
+            )
         }
     }
 }
