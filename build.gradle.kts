@@ -16,10 +16,15 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     testImplementation("io.rest-assured:rest-assured:5.3.0")
+    // Source: https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator
+    implementation("io.rest-assured:json-schema-validator:5.3.0")
+// Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.3")
     testImplementation("com.fasterxml.jackson.core:jackson-databind:2.21.2")
 
     testImplementation("io.qameta.allure:allure-junit5:2.25.0")
     testImplementation("io.qameta.allure:allure-rest-assured:2.25.0")
+
     // Source: https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide
     implementation("io.qameta.allure:allure-selenide:2.25.0")
     // Source: https://mvnrepository.com/artifact/com.codeborne/selenide
