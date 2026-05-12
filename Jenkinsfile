@@ -5,8 +5,16 @@ pipeline{
         jdk 'jdk17'
     }
 
+    parameters {
+        string(
+                name: 'TAGS',
+                defaultValue: 'smoke',
+                description: 'Enter one or multiple tags separated by comma. Example: smoke,regress,api'
+        )
+    }
+
     environment  {
-        GRADLE_OPTS = "-Dorg.gradle.daemon=false"
+        TAG = "${params.TAGS}"
     }
 
     stages {
@@ -18,22 +26,31 @@ pipeline{
             }
 
         }
-        stage("Run Users Tests")
-                {
-                    steps{
-                        sh 'chmod +x gradlew'
-                        sh './gradlew clean test -Dtag=api_users'
-                    }
+        stage('Run Tests') {
+
+            steps {
+
+                script {
+
+                    echo "Running tags: ${TAG}"
+
+                    sh """
+                        chmod +x gradlew
+                        ./gradlew clean test -Dtag=${TAG}
+                    """
                 }
-        stage("Run Production Tests")
-                {
-                    steps {
-                        sh './gradlew test -Dtag=api-products'
-                    }
-                }
-        stage('Allure Report'){
-            steps{
-                allure includeProperties: false, results: [[path: 'build/allure-results']]
+            }
+        }
+
+        stage('Generate Allure Report') {
+
+            steps {
+
+                allure([
+                        includeProperties: false,
+                        jdk: '',
+                        results: [[path: 'build/allure-results']]
+                ])
             }
         }
     }

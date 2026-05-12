@@ -33,12 +33,26 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-    systemProperty("allure.results.directory", "build/allure-results")
 
-    val includeTag = System.getenv("tag")
-    if (includeTag != null) {
-        useJUnitPlatform{
-            includeTags(includeTag)
+    systemProperty(
+        "allure.results.directory",
+        "build/allure-results"
+    )
+
+    val includeTag = System.getProperty("tag")
+
+    if (!includeTag.isNullOrBlank()) {
+
+        useJUnitPlatform {
+
+            includeTags(
+                *includeTag
+                    .split(",")
+                    .map { it.trim() }
+                    .toTypedArray()
+            )
         }
+
+        println("Running tags: $includeTag")
     }
 }
