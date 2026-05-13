@@ -16,7 +16,7 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-.env
+src/test/java/config/utils/.env
 
 ### Eclipse ###
 .apt_generated
