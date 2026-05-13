@@ -141,13 +141,13 @@ public class ProfilePage extends BasePage {
         open(URL_PROFILE);
 
         SelenideElement deleteButton =
-                $x("//button[text()='Delete All Books']");
+                $x("//div[@class='text-right button di']/button");
 
         deleteButton
                 .shouldBe(visible, enabled)
-                .scrollIntoView("{block: 'start'}");
+                .scrollIntoView("{block: 'center'}");
 
-        executeJavaScript("arguments[0].click();", deleteButton);
+        deleteButton.click();
 
         $("#closeSmallModal-ok")
                 .shouldBe(visible, enabled)
