@@ -1,6 +1,7 @@
 package config.ui;
 
 import com.codeborne.selenide.Configuration;
+import config.utils.EnvConfig;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -9,8 +10,12 @@ public class TestConfig {
     {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        Configuration.remote = "http://localhost:4444/wd/hub";
+        String remote = EnvConfig.getRemote();
+        if(remote != null && !remote.isEmpty()){
+            Configuration.remote = remote;
+        }
         Configuration.browser = "chrome";
+
 
         Configuration.browserCapabilities = options;
         Configuration.browserSize = "1920x1080";

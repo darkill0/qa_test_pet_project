@@ -1,6 +1,7 @@
 package ui.pages.demqa.bookstore;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.ScrollIntoViewOptions;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.collections.SizeGreaterThan;
@@ -12,6 +13,7 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.ScrollIntoViewOptions.instant;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
@@ -49,7 +51,7 @@ public class ProfilePage extends BasePage {
 
     public void goToBooksStore() {
 
-        btnGoToStore.shouldBe(visible).click();
+        btnGoToStore.scrollIntoView(instant().block(ScrollIntoViewOptions.Block.center)).shouldBe(visible).click();
 
         webdriver().shouldHave(urlContaining("/books"));
 
@@ -135,48 +137,26 @@ public class ProfilePage extends BasePage {
     }
 
     public void deleteAllBooks() {
+
         open(URL_PROFILE);
-        Wait().until(d -> Duration.ofSeconds(1));
-        $x("//button[text()='Delete All Books']").scrollIntoView(true).click();
-        Wait().until(d -> Duration.ofSeconds(1));
-        $("#closeSmallModal-ok")
-                .shouldBe(visible)
+
+        $x("//button[text()='Delete All Books']")
+                .shouldBe(visible, enabled)
+                .scrollIntoView("{block: 'center'}")
                 .click();
 
-        Wait().until(d -> Duration.ofSeconds(1));
-        try {
+        $("#closeSmallModal-ok")
+                .shouldBe(visible, enabled)
+                .click();
 
-            if (WebDriverRunner.getWebDriver()
-                    .switchTo()
-                    .alert() != null) {
 
-                switchTo().alert().accept();
-            }
 
-        } catch (Exception ignored) {
-
-        }
         refresh();
-        Wait().until(d -> Duration.ofSeconds(1));
-        try {
 
-            if (WebDriverRunner.getWebDriver()
-                    .switchTo()
-                    .alert() != null) {
 
-                switchTo().alert().accept();
-            }
 
-        } catch (Exception ignored) {
-
-        }
-
-        int booksCount =
-                $$x("//div[@class='action-buttons']//a")
-                        .shouldBe(size(0))
-                        .size();
-
-        assertEquals(0, booksCount);
+        $$x("//div[@class='action-buttons']//a")
+                .shouldHave(size(0));
     }
 
     public void logOut() {

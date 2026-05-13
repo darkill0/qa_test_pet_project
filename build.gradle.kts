@@ -31,6 +31,7 @@ dependencies {
     implementation("com.codeborne:selenide:7.16.0")
     // Source: https://mvnrepository.com/artifact/org.junit-pioneer/junit-pioneer
     testImplementation("org.junit-pioneer:junit-pioneer:2.3.0")
+    testImplementation("io.github.cdimascio:dotenv-java:3.0.0")
 }
 
 
