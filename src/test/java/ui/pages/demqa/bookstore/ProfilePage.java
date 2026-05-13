@@ -140,20 +140,20 @@ public class ProfilePage extends BasePage {
 
         open(URL_PROFILE);
 
-        $x("//button[text()='Delete All Books']")
+        SelenideElement deleteButton =
+                $x("//button[text()='Delete All Books']");
+
+        deleteButton
                 .shouldBe(visible, enabled)
-                .scrollIntoView("{block: 'center'}")
-                .click();
+                .scrollIntoView("{block: 'start'}");
+
+        executeJavaScript("arguments[0].click();", deleteButton);
 
         $("#closeSmallModal-ok")
                 .shouldBe(visible, enabled)
                 .click();
 
-
-
         refresh();
-
-
 
         $$x("//div[@class='action-buttons']//a")
                 .shouldHave(size(0));
