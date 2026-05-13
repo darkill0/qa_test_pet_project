@@ -26,6 +26,6 @@ public class TestConfig {
         Configuration.browserSize = "1920x1080";
         Configuration.timeout = 100000;
         Configuration.pageLoadTimeout = 40000;
-        Configuration.headless = false;
+        Configuration.headless = true;
     }
 }
