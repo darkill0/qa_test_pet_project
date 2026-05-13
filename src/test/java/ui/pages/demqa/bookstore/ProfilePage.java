@@ -141,14 +141,14 @@ public class ProfilePage extends BasePage {
         open(URL_PROFILE);
 
         SelenideElement deleteButton =
-                $x("//div[@class='text-right button di']/button");
+                $$("button")
+                        .findBy(exactText("Delete All Books"));
 
         deleteButton
                 .shouldBe(visible, enabled)
                 .scrollIntoView("{block: 'center'}");
 
-        deleteButton.shouldBe(visible, enabled)
-                .scrollIntoView(true).click();
+        executeJavaScript("arguments[0].click();", deleteButton);
 
         $("#closeSmallModal-ok")
                 .should(appear)
@@ -157,7 +157,7 @@ public class ProfilePage extends BasePage {
 
         refresh();
 
-        $$x("//div[@class='action-buttons']//a")
+        $$("div.action-buttons a")
                 .shouldHave(size(0));
     }
 

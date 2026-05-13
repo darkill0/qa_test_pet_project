@@ -23,7 +23,7 @@ public class ProfilePageTests extends BaseTest {
         profilePageSteps = new ProfilePageSteps();
     }
 
-    @Test
+    @RepeatedTest(3)
     @Tag("e2e_test")
     @DisplayName("UI test bookstore")
     @Description("Тестирование входа и работа с книгами")
