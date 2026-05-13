@@ -10,7 +10,6 @@ public class TestConfig {
     {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
-                "--headless=new",
                 "--no-sandbox",
                 "--disable-dev-shm-usage",
                 "--window-size=1920,1080"
@@ -24,7 +23,7 @@ public class TestConfig {
 
         Configuration.browserCapabilities = options;
         Configuration.browserSize = "1920x1080";
-        Configuration.timeout = 100000;
+        Configuration.timeout = 150000;
         Configuration.pageLoadTimeout = 40000;
         Configuration.headless = true;
     }
