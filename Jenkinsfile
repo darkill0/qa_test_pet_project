@@ -6,21 +6,18 @@ pipeline {
         jdk 'jdk17'
     }
 
-    options {
-        parallelsAlwaysFailFast()
-    }
-
     parameters {
 
         string(
                 name: 'TAGS',
-                defaultValue: 'smoke,api_users',
+                defaultValue: 'smoke',
                 description: 'Enter tags separated by comma'
         )
     }
 
     environment {
-        GRADLE_OPTS = "-Dorg.gradle.daemon=true"
+
+        GRADLE_OPTS = '-Xmx2g -Dorg.gradle.daemon=false'
     }
 
     stages {
@@ -29,9 +26,31 @@ pipeline {
 
             steps {
 
-                git branch: 'main',
+                git(
+                        branch: 'main',
                         url: 'git@github.com:darkill0/qa_test_pet_project.git',
                         credentialsId: 'github-ssh-key'
+                )
+            }
+        }
+
+        stage('Check Environment') {
+
+            steps {
+
+                sh '''
+                    echo "========== JAVA =========="
+                    java -version
+
+                    echo "========== CHROME =========="
+                    google-chrome --version || true
+
+                    echo "========== MEMORY =========="
+                    free -h || true
+
+                    echo "========== CPU =========="
+                    nproc || true
+                '''
             }
         }
 
@@ -46,7 +65,7 @@ pipeline {
             }
         }
 
-        stage('Run Parallel Tests') {
+        stage('Run Tests') {
 
             steps {
 
@@ -59,31 +78,21 @@ pipeline {
 
                     echo "Selected tags: ${tags}"
 
-                    def parallelStages = [:]
+                    for (String currentTag : tags) {
 
-                    tags.each { currentTag ->
+                        echo "Running tag: ${currentTag}"
 
-                        parallelStages["Run ${currentTag}"] = {
+                        sh """
+                            chmod +x gradlew
 
-                            stage("Test ${currentTag}") {
-
-                                sh """
-                                    mkdir -p build/allure-results/${currentTag}
-
-                                    chmod +x gradlew
-
-                                    ./gradlew test \
-                                    -Dtag=${currentTag} \
-                                    --stacktrace \
-                                    --debug \
-                                    --no-daemon\
-                                    -Dallure.results.directory=build/allure-results/${currentTag}
-                                """
-                            }
-                        }
+                            ./gradlew clean test \
+                            -Dtag=${currentTag} \
+                            --stacktrace \
+                            --info \
+                            --no-daemon \
+                            -Dallure.results.directory=build/allure-results/${currentTag}
+                        """
                     }
-
-                    parallel parallelStages
                 }
             }
         }
@@ -121,6 +130,16 @@ pipeline {
                     artifacts: 'build/allure-results/**/*',
                     allowEmptyArchive: true
             )
+        }
+
+        failure {
+
+            echo 'Pipeline failed'
+        }
+
+        success {
+
+            echo 'Pipeline finished successfully'
         }
     }
 }
