@@ -4,14 +4,13 @@ import config.ui.BaseTest;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ui.Steps.demoqa.widgets.ProgressorBarSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("progressor_bar_ui_tests")
-@DisplayName("тестирование progressor bar")
+@DisplayName("[UI] тестирование progressor bar")
 public class ProgressorBarPageTests extends BaseTest {
 
     private final ProgressorBarSteps progressorBarSteps = new ProgressorBarSteps();
@@ -36,6 +35,12 @@ public class ProgressorBarPageTests extends BaseTest {
     public void checkResetProgressor(){
         progressorBarSteps.openSitePage();
         progressorBarSteps.shouldResetProgressorBar();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 
 

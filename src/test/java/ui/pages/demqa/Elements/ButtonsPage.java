@@ -4,7 +4,7 @@ package ui.pages.demqa.Elements;
 import com.codeborne.selenide.SelenideElement;
 import config.ui.BasePage;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ButtonsPage extends BasePage {
@@ -20,7 +20,7 @@ public class ButtonsPage extends BasePage {
 
     public void shouldDoubleClickButton(){
 
-        doubleClickButton.doubleClick();
+        doubleClickButton.shouldBe(visible,enabled).scrollIntoView(true).doubleClick();
         SelenideElement outputText = $x("//p[@id='doubleClickMessage']");
         outputText.shouldHave(text("You have done a double click"));
 
@@ -28,7 +28,7 @@ public class ButtonsPage extends BasePage {
 
     public void shouldRightClickButton(){
 
-        rightClickButton.contextClick();
+        rightClickButton.shouldBe(visible, enabled).scrollIntoView(true).contextClick();
         SelenideElement outputText = $x("//p[@id='rightClickMessage']");
         outputText.shouldHave(text("You have done a right click"));
 
@@ -36,7 +36,7 @@ public class ButtonsPage extends BasePage {
 
     public void shouldDynamicClickButton(){
 
-        dynamicClickButton.click();
+        dynamicClickButton.shouldBe(visible, enabled).scrollIntoView(true).click();
         SelenideElement outputText = $x("//p[@id='dynamicClickMessage']");
         outputText.shouldHave(text("You have done a dynamic click"));
 

@@ -2,18 +2,20 @@ package ui.demoqatests.Elements;
 
 import config.ui.BaseTest;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ui.Steps.demoqa.Elements.CheckBoxSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("demo-qa-check-box-page")
-@DisplayName("Провекра чекбоксов")
+@DisplayName("[UI] Провекра чекбоксов")
 @Epic("Checkbox check")
 public class CheckBoxTests extends BaseTest {
 
     private static CheckBoxSteps checkBoxSteps;
+
+
+
     @BeforeAll
     public static void setUp()
     {
@@ -31,5 +33,11 @@ public class CheckBoxTests extends BaseTest {
         checkBoxSteps.openCheckBoxPage();
         checkBoxSteps.printTreeLeafElements();
         int a = 1;
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

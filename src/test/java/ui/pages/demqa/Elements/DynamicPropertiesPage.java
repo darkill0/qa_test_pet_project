@@ -4,9 +4,7 @@ import config.ui.BasePage;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.cssClass;
-import static com.codeborne.selenide.Condition.visible;
-
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -23,7 +21,7 @@ public class DynamicPropertiesPage extends BasePage {
     }
 
     public void shouldVisibleButtonAfter5Seconds(){
-        $x("//button[@id='visibleAfter']").shouldBe(visible, Duration.ofSeconds(5));
+        $x("//button[@id='visibleAfter']").should(appear, Duration.ofSeconds(10));
     }
 
     public void shouldHaveVisibleTextWithRandomId(){

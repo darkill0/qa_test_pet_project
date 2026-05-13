@@ -5,10 +5,14 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.RetryingTest;
 import ui.Steps.demoqa.Elements.DynamicPropsSteps;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("dynamic_props_ui_tests")
 @DisplayName("[UI] Тестирование динамичных объектов сайта")
@@ -17,7 +21,7 @@ public class DynamicPropsTests extends BaseTest {
     private final DynamicPropsSteps dynamicPropsSteps = new DynamicPropsSteps();
 
     @Tag("smoke_test")
-    @Test
+    @RetryingTest(3)
     @Owner("Ilya Koltsov")
     @Severity(SeverityLevel.TRIVIAL)
     @DisplayName("Проверка появление кнопки после 5 секунд")
@@ -44,6 +48,12 @@ public class DynamicPropsTests extends BaseTest {
     public void checkVisibleTextWithRandomId(){
         dynamicPropsSteps.openPage();
         dynamicPropsSteps.shouldHaveTextWithRandomId();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 
 }

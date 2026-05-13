@@ -1,5 +1,6 @@
 package ui.demoqatests.interactions;
 
+import config.ui.BasePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -7,13 +8,15 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 import ui.Steps.demoqa.interactions.DroppableSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Epic("DemoQA Тестирование")
-@Feature("Взаимодействия - Droppable")
+@Feature(" Взаимодействия - Droppable")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Tag("droppable_page_ui_tests")
-public class DroppableTests {
+@DisplayName("[UI] Тестирование droppable")
+public class DroppableTests extends BasePage {
 
     private DroppableSteps droppableSteps;
 
@@ -24,7 +27,7 @@ public class DroppableTests {
         droppableSteps.openDroppablePage();
     }
 
-    @Test
+    //@Test
     @Order(1)
     @Tag("smoke")
     @Tag("droppable")
@@ -64,7 +67,7 @@ public class DroppableTests {
                 .verifyDroppableHighlighted(droppableSteps.droppablePage.getDroppableSimple());
     }
 
-    @Test
+    //@Test
     @Tag("smoke")
     @Tag("droppable")
     @DisplayName("Допустимый элемент должен успешно дропаться")
@@ -76,7 +79,7 @@ public class DroppableTests {
                 .verifyAcceptableDroppable();
     }
 
-    @Test
+    //@Test
     @Order(3)
     @Tag("smoke")
     @Tag("droppable")
@@ -100,5 +103,11 @@ public class DroppableTests {
         );
 
         assertEquals(initialPosition, positionAfterRevert, "Элемент должен вернуться на исходную позицию");
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

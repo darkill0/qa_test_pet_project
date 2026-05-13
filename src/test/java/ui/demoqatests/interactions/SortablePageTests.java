@@ -5,10 +5,13 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.interactions.SortablePageSteps;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("sortable_page_ui_tests")
 @DisplayName("[UI] Тестирование ручной сортировки ")
@@ -33,5 +36,11 @@ public class SortablePageTests extends BaseTest {
     public void checkGridDragAndDrop(){
         sortablePageSteps.openSitePage();
         sortablePageSteps.checkDragAndDropForGrid();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

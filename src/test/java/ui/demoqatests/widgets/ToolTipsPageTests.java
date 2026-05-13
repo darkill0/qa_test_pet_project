@@ -4,10 +4,13 @@ import config.ui.BaseTest;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.widgets.ToolTipsPageSteps;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("tool_tips_ui_page")
 @DisplayName("[UI] Проверка страницы tooltips")
@@ -53,5 +56,11 @@ public class ToolTipsPageTests extends BaseTest {
     public void  checkHoverToNumberText(){
         toolTipsPageSteps.openSitePage();
         toolTipsPageSteps.shouldHoverIpAddressAndVisibleToolTipText();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

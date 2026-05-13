@@ -4,16 +4,20 @@ import config.ui.BaseTest;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.Elements.DownloadPageSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("upload_download_ui_tests")
-@DisplayName("Тестирование скачивание и закачку файла на сайт")
+@DisplayName("[UI] Тестирование скачивание и закачку файла на сайт")
 @Epic("загрузка и скачивание файлов")
 public class DownloadPageTests extends BaseTest {
     private final DownloadPageSteps downloadPageSteps = new DownloadPageSteps();
+
 
     @Test
     @Tag("smoke_test")
@@ -33,5 +37,11 @@ public class DownloadPageTests extends BaseTest {
     public void checkUploadFile(){
         downloadPageSteps.shouldOpenSitePage();
         downloadPageSteps.shouldUploadFile();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

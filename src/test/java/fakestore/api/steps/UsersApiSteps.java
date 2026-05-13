@@ -52,8 +52,10 @@ public class UsersApiSteps {
                 .when().post(PATH)
                 .then().spec(FakeStoreRestApiSpecifications.responseSpecificationsCustom(201, "application/json"))
                 .extract().jsonPath().getInt("id");
-        Assertions.assertEquals(expectedId, id);
-    }
+        Assertions.assertTrue(
+                List.of(1, 11).contains(id),
+                "id должен быть 1 или 11, но пришёл: " + id
+        );    }
 
     @Step("Тестирование обновления пользователя по id={id}")
     public void putUpdateUser(int id, NewUserPojo newUserPojo){

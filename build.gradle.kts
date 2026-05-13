@@ -29,6 +29,8 @@ dependencies {
     implementation("io.qameta.allure:allure-selenide:2.25.0")
     // Source: https://mvnrepository.com/artifact/com.codeborne/selenide
     implementation("com.codeborne:selenide:7.16.0")
+    // Source: https://mvnrepository.com/artifact/org.junit-pioneer/junit-pioneer
+    testImplementation("org.junit-pioneer:junit-pioneer:2.3.0")
 }
 
 

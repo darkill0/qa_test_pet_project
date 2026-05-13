@@ -4,13 +4,16 @@ import config.ui.BaseTest;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.widgets.TabsPageSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("tabs_page_ui_tests")
-@DisplayName("Тестирование страницы с tabs")
+@DisplayName("[UI] Тестирование страницы с tabs")
 public class TabsPageTests extends BaseTest {
     private final TabsPageSteps tabsPageSteps = new TabsPageSteps();
 
@@ -22,5 +25,11 @@ public class TabsPageTests extends BaseTest {
     public void checkClickToSecondAndToFirstTabAndCheckTextTabs(){
         tabsPageSteps.openSitePage();
         tabsPageSteps.shouldClickToSecondTabAndAfterToFirst();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

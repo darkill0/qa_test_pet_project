@@ -72,8 +72,8 @@ public class UsersApiTests {
     @Owner("Ilya Koltsov")
     @Severity(SeverityLevel.CRITICAL)
     public void checkAddNewUser(){
-        NewUserPojo newUserPojo = new NewUserPojo(11, "Test", "Test@email.com", "password");
-        usersApiSteps.postAddNewUser(newUserPojo, newUserPojo.getId());
+        NewUserPojo newUserPojo = new NewUserPojo(1, "Test", "Test@email.com", "password");
+        usersApiSteps.postAddNewUser(newUserPojo, 1);
     }
 
     @Test

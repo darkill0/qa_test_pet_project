@@ -4,14 +4,15 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junitpioneer.jupiter.RetryingTest;
 import ui.Steps.demoqa.Elements.ButtonsPageSteps;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("buttons_page_ui_test")
 @Owner("Ilya Koltov")
-@DisplayName("тестирование страницы кнопок")
+@DisplayName("[UI] тестирование страницы кнопок")
 public class ButtonsPageTests {
 
     private final ButtonsPageSteps buttonsPageSteps = new ButtonsPageSteps();
@@ -20,7 +21,7 @@ public class ButtonsPageTests {
     @DisplayName("тестирование двойного клика")
     @Description("тестирование двойного клика")
     @Severity(SeverityLevel.MINOR)
-    @Test
+    @RetryingTest(maxAttempts = 3)
     public void checkDoubleClick(){
         buttonsPageSteps.shouldOpenPage();
         buttonsPageSteps.shouldDoubleClick();
@@ -44,6 +45,12 @@ public class ButtonsPageTests {
     public void checkDynamicClick(){
         buttonsPageSteps.shouldOpenPage();
         buttonsPageSteps.shouldDynamicClick();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 
 }

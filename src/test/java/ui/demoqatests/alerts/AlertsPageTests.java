@@ -3,13 +3,17 @@ package ui.demoqatests.alerts;
 import config.ui.BaseTest;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ui.Steps.demoqa.alerts.AlertsPageSteps;
 
+import static com.codeborne.selenide.Selenide.*;
+
 @Tag("alerts_page_ui_tests")
+@DisplayName("[UI] Тестирование alerts")
 public class AlertsPageTests extends BaseTest {
     private final AlertsPageSteps alertsPageSteps = new AlertsPageSteps();
+
+
 
     @Test
     @Tag("smoke_test")
@@ -49,5 +53,11 @@ public class AlertsPageTests extends BaseTest {
     public void checkOpenPromtAlertModal(){
         alertsPageSteps.openAlertPage();
         alertsPageSteps.shouldOpenPromtAlertWindowWith();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

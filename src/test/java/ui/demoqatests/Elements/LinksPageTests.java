@@ -4,13 +4,16 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.Elements.LinksPageSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("link_page_ui_test")
-@DisplayName("Тестирование страницы рабочих ссылок")
+@DisplayName("[UI] Тестирование страницы рабочих ссылок")
 @Epic("Тестирование открытие ссылок на страницк сайта")
 public class LinksPageTests {
 
@@ -86,5 +89,11 @@ public class LinksPageTests {
     public void checkOpenNotFoundLink(){
         linksPageSteps.openPage();
         linksPageSteps.shouldOpenNotFoundLink();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

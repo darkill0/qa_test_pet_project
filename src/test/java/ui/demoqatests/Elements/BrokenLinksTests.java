@@ -5,13 +5,16 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.Elements.BrokenLinksSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("broken_link_ui_test")
-@DisplayName("Тестирование валидных и невалидных ссылок")
+@DisplayName("[UI] Тестирование валидных и невалидных ссылок")
 @Epic("тестирование работы с ссылками на сайте")
 public class BrokenLinksTests extends BaseTest {
     private final BrokenLinksSteps brokenLinksSteps = new BrokenLinksSteps();
@@ -34,5 +37,10 @@ public class BrokenLinksTests extends BaseTest {
     public void checkOpenInvalidUrl(){
         brokenLinksSteps.shouldOpenPage();
         brokenLinksSteps.shouldOpenInvalidLink();
+    }
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

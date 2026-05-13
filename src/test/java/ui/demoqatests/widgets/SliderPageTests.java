@@ -4,13 +4,16 @@ import config.ui.BaseTest;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.widgets.SliderPageSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("slider_page_ui_tests")
-@DisplayName("Проверка slider page")
+@DisplayName("[UI] Проверка slider page")
 public class SliderPageTests extends BaseTest {
     private final SliderPageSteps sliderPageSteps = new SliderPageSteps();
 
@@ -22,5 +25,11 @@ public class SliderPageTests extends BaseTest {
     public void checkSlider(){
         sliderPageSteps.openSitePage();
         sliderPageSteps.shouldSlideTo75Percentage();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

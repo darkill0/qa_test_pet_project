@@ -5,11 +5,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ui.Steps.demoqa.bookstore.ProfilePageSteps;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("profile_ui_tests")
 @DisplayName("[UI] тестирование bookstore")
@@ -39,5 +38,10 @@ public class ProfilePageTests extends BaseTest {
         profilePageSteps.deleteOneBook();
         profilePageSteps.deleteAllBooksInProfile();
 
+    }
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

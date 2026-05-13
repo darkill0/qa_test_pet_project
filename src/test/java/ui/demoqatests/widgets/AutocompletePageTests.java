@@ -4,13 +4,16 @@ import config.ui.BaseTest;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.widgets.AutocompletePageSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("autocomplete_page_ui_test")
-@DisplayName("Тестирование автодополнения на странице")
+@DisplayName("[UI] Тестирование автодополнения на странице")
 public class AutocompletePageTests extends BaseTest {
     private final AutocompletePageSteps autocompletePageSteps = new AutocompletePageSteps();
 
@@ -42,5 +45,11 @@ public class AutocompletePageTests extends BaseTest {
     public void checkSingleInputAutocompleteAndKeysExecution(){
         autocompletePageSteps.openSitePage();
         autocompletePageSteps.shouldAddSingleInputPageAndKeysExecution();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 }

@@ -1,16 +1,21 @@
 package ui.demoqatests.Elements;
 
 import io.qameta.allure.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.Elements.RadioButtonSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("radiobutton_ui_test")
-@DisplayName("Тестирование страницы с radio кнопки")
+@DisplayName("[UI] Тестирование страницы с radio кнопки")
 public class RadioButtonTest {
 
     private final RadioButtonSteps radioButtonSteps = new RadioButtonSteps();
+
+
 
     @Owner("Ilya Koltsov")
     @Severity(SeverityLevel.CRITICAL)
@@ -32,6 +37,12 @@ public class RadioButtonTest {
     public void checkClickImpressiveButton(){
         radioButtonSteps.openPage();
         radioButtonSteps.shouldSuccessClickButtonImpressive();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 
 }

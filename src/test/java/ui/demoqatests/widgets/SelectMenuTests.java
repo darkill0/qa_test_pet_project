@@ -4,10 +4,13 @@ import config.ui.BaseTest;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ui.Steps.demoqa.widgets.SelectMenuSteps;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("select_menu_page")
 @DisplayName("[UI] Проверка страницы Select Menu")
@@ -66,6 +69,12 @@ public class SelectMenuTests extends BaseTest {
                 .shouldHaveOldStyleValue(
                         "Purple"
                 );
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 
 //    @Test

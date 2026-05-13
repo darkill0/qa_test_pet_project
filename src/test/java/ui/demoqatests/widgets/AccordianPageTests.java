@@ -4,14 +4,13 @@ import config.ui.BaseTest;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ui.Steps.demoqa.widgets.AccordianPageSteps;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @Tag("accordian_page_ui_tests")
-@DisplayName("Проверка страницы аккордиана")
+@DisplayName("[UI] Проверка страницы аккордиана")
 public class AccordianPageTests extends BaseTest {
     private final AccordianPageSteps accordianPageSteps = new AccordianPageSteps();
 
@@ -45,6 +44,12 @@ public class AccordianPageTests extends BaseTest {
     @Order(2)
     public void checkCloseAccordianObjectAfterClickNextElement(){
         accordianPageSteps.openSitePage().shouldCollapsedFirstElementWhenClickFirstElement();
+    }
+
+    @AfterEach
+    void tearDown() {
+
+        closeWebDriver();
     }
 
 }
