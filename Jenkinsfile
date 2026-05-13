@@ -20,7 +20,7 @@ pipeline {
     }
 
     environment {
-        GRADLE_OPTS = "-Dorg.gradle.daemon=false"
+        GRADLE_OPTS = "-Dorg.gradle.daemon=true"
     }
 
     stages {
@@ -74,6 +74,9 @@ pipeline {
 
                                     ./gradlew test \
                                     -Dtag=${currentTag} \
+                                    --stacktrace \
+                                    --debug \
+                                    --no-daemon\
                                     -Dallure.results.directory=build/allure-results/${currentTag}
                                 """
                             }
