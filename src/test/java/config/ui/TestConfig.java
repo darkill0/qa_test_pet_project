@@ -15,10 +15,10 @@ public class TestConfig {
                 "--disable-dev-shm-usage",
                 "--window-size=1920,1080"
         );
-        String remote = EnvConfig.getRemote();
-        if(remote != null && !remote.isEmpty()){
-            Configuration.remote = remote;
-        }
+//        String remote = EnvConfig.getRemote();
+//        if(remote != null && !remote.isEmpty()){
+//            Configuration.remote = remote;
+//        }
         Configuration.browser = "chrome";
 
 
