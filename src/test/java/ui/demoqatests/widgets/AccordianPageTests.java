@@ -10,6 +10,7 @@ import ui.Steps.demoqa.widgets.AccordianPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("accordian_page_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Проверка страницы аккордиана")
 public class AccordianPageTests extends BaseTest {
     private final AccordianPageSteps accordianPageSteps = new AccordianPageSteps();

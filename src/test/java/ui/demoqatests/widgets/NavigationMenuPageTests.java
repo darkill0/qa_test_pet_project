@@ -13,6 +13,7 @@ import ui.pages.demqa.widgets.NavigationMenuPage;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("navigation_menu")
+@Tag("ui")
 @DisplayName("[UI] Проверка navigation menu")
 public class NavigationMenuPageTests extends BaseTest {
 

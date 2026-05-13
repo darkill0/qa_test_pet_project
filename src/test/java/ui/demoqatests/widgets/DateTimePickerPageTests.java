@@ -13,6 +13,7 @@ import ui.Steps.demoqa.widgets.DatePickerPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("date_time_picker_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Тестирование ввода даты и времени")
 public class DateTimePickerPageTests extends BaseTest {
     private final DatePickerPageSteps datePickerPageSteps = new DatePickerPageSteps();

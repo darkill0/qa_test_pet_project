@@ -17,19 +17,16 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@Tag("api-products")
+@Tag("api_products")
+@Tag("reqres_api")
 @Epic("API Products")
 @Feature("API test products")
+@DisplayName("[Reqres API] Тестирование products api reqres")
 public class ProductsTestApi {
 
-    private static ProductSteps productSteps;
-    @BeforeAll
-    public static void setUp()
-    {
-        RestAssured.reset();
-        RestApiSpecifications.requestSpec();
-        productSteps = new ProductSteps();
-    }
+    private static ProductSteps productSteps = new ProductSteps();;
+
+
 
     @Test
     @DisplayName("Проверка получение товаров и проверка содержания и соответсвие схемы JSON")
@@ -37,12 +34,11 @@ public class ProductsTestApi {
     @Owner("Ilya Koltsov")
     @Severity(CRITICAL)
     @Description("Тест проверяет, что API возвращает список товаров с корректной структурой и валидными данными")
-
     public void checkGetProductsAndSchemaJson()
     {
         Allure.step("Отправка GET запроса на /products", () -> {
             Response response =
-                    given()
+                    given().spec(RestApiSpecifications.requestSpec())
                             .when()
                             .get("products")
                             .then()
@@ -74,7 +70,7 @@ public class ProductsTestApi {
     @DisplayName("Получение товаров и проверка что per_page == data.size")
     public void getProductsAndCheckSizeOnPage()
     {
-        var json = given()
+        var json = given().spec(RestApiSpecifications.requestSpec())
                 .when().get("products")
                 .then().spec(RestApiSpecifications.responseSpecOK200())
                 .extract().jsonPath();
@@ -88,7 +84,7 @@ public class ProductsTestApi {
     public void getOneProductAndCheckData()
     {
         ProductPojo expectedProduct = new ProductPojo(1, "cerulean", 2000, "#98B2D1", "15-4020");
-        ProductPojo actualProduct = given()
+        ProductPojo actualProduct = given().spec(RestApiSpecifications.requestSpec())
                 .when().get("products/1")
                 .then().spec(RestApiSpecifications.responseSpecOK200())
                 .extract().jsonPath().getObject("data", ProductPojo.class);
@@ -99,7 +95,7 @@ public class ProductsTestApi {
     @DisplayName("Получение несуществующего товара")
     public void getOneUnknowProduct()
     {
-        given()
+        given().spec(RestApiSpecifications.requestSpec())
                 .when().get("products/100")
                 .then().spec(RestApiSpecifications.responseSpecCustom(404)).log().all();
     }

@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("fake_store_products_tests")
-@DisplayName("Тестирование fake store Products")
+@Tag("fake_store_api")
+@DisplayName("[FAKE API] Тестирование fake store Products")
 @Epic("Проверка работы Products api с Fake Store")
 public class ProductsApiTests {
     private static ProductsApiSteps productsApiSteps;

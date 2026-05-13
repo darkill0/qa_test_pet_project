@@ -13,6 +13,7 @@ import ui.Steps.demoqa.Elements.LinksPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("link_page_ui_test")
+@Tag("ui")
 @DisplayName("[UI] Тестирование страницы рабочих ссылок")
 @Epic("Тестирование открытие ссылок на страницк сайта")
 public class LinksPageTests {

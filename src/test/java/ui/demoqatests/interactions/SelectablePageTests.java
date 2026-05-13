@@ -13,6 +13,7 @@ import ui.Steps.demoqa.interactions.SelectablePageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("selectable_page_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Тестирование Selectable Page")
 public class SelectablePageTests extends BaseTest {
     private final SelectablePageSteps selectablePageSteps = new SelectablePageSteps();

@@ -10,6 +10,7 @@ import ui.Steps.demoqa.alerts.ModalDialogsSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("modal_dialogs_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Проверка modal dialogs")
 public class ModalDialogsTests {
     private final ModalDialogsSteps modalDialogsSteps = new ModalDialogsSteps();

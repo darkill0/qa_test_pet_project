@@ -13,6 +13,7 @@ import ui.Steps.demoqa.widgets.SliderPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("slider_page_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Проверка slider page")
 public class SliderPageTests extends BaseTest {
     private final SliderPageSteps sliderPageSteps = new SliderPageSteps();

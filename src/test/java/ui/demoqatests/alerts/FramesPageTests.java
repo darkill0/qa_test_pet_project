@@ -13,6 +13,7 @@ import ui.Steps.demoqa.alerts.FramesPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("frame_page_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Тестирование frames на страницах")
 @Owner("Ilya Koltsov")
 public class FramesPageTests extends BaseTest {

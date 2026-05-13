@@ -14,6 +14,7 @@ import ui.Steps.demoqa.Elements.BrokenLinksSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("broken_link_ui_test")
+@Tag("ui")
 @DisplayName("[UI] Тестирование валидных и невалидных ссылок")
 @Epic("тестирование работы с ссылками на сайте")
 public class BrokenLinksTests extends BaseTest {

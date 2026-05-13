@@ -13,6 +13,7 @@ import ui.Steps.demoqa.widgets.AutocompletePageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("autocomplete_page_ui_test")
+@Tag("ui")
 @DisplayName("[UI] Тестирование автодополнения на странице")
 public class AutocompletePageTests extends BaseTest {
     private final AutocompletePageSteps autocompletePageSteps = new AutocompletePageSteps();

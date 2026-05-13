@@ -9,6 +9,7 @@ import ui.Steps.demoqa.alerts.AlertsPageSteps;
 import static com.codeborne.selenide.Selenide.*;
 
 @Tag("alerts_page_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Тестирование alerts")
 public class AlertsPageTests extends BaseTest {
     private final AlertsPageSteps alertsPageSteps = new AlertsPageSteps();

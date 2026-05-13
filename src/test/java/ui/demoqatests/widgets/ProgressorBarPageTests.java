@@ -10,6 +10,7 @@ import ui.Steps.demoqa.widgets.ProgressorBarSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("progressor_bar_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] тестирование progressor bar")
 public class ProgressorBarPageTests extends BaseTest {
 

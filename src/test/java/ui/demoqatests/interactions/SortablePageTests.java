@@ -14,6 +14,7 @@ import ui.Steps.demoqa.interactions.SortablePageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("sortable_page_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Тестирование ручной сортировки ")
 public class SortablePageTests extends BaseTest {
     private final SortablePageSteps sortablePageSteps = new SortablePageSteps();

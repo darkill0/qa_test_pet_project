@@ -13,6 +13,7 @@ import ui.Steps.demoqa.widgets.ToolTipsPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("tool_tips_ui_page")
+@Tag("ui")
 @DisplayName("[UI] Проверка страницы tooltips")
 public class ToolTipsPageTests extends BaseTest {
     private final ToolTipsPageSteps toolTipsPageSteps = new ToolTipsPageSteps();

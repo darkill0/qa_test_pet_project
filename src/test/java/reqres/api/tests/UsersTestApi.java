@@ -12,20 +12,15 @@ import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
-@DisplayName("[API] Набор тестов для работы с пользователями")
+@DisplayName("[Reqres API] Набор тестов для работы с пользователями")
 @Tag(value = "api_users")
+@Tag("reqres_api")
 @Epic("Users API")
 @Feature("Users management")
 public class UsersTestApi {
 
-    private static UsersSteps usersSteps;
-    @BeforeAll
-    public static void setUp()
-    {
-        usersSteps = new UsersSteps();
-        RestAssured.reset();
-        RestApiSpecifications.requestSpec();
-    }
+    private static UsersSteps usersSteps = new UsersSteps();
+
 
     @Test
     @DisplayName("Тестирование получения пользователей и проверка что метод возвращает правильные данные для 1 пользователя")

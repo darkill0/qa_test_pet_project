@@ -8,6 +8,7 @@ import ui.Steps.demoqa.Elements.CheckBoxSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("demo-qa-check-box-page")
+@Tag("ui")
 @DisplayName("[UI] Провекра чекбоксов")
 @Epic("Checkbox check")
 public class CheckBoxTests extends BaseTest {

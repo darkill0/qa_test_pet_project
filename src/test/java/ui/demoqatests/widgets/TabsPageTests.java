@@ -13,6 +13,7 @@ import ui.Steps.demoqa.widgets.TabsPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("tabs_page_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Тестирование страницы с tabs")
 public class TabsPageTests extends BaseTest {
     private final TabsPageSteps tabsPageSteps = new TabsPageSteps();

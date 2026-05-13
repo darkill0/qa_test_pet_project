@@ -13,6 +13,7 @@ import ui.Steps.demoqa.alerts.BrowserWindowsSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("browser_window_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Проверка windows страницы сайта")
 public class BrowserWindowsTests extends BaseTest {
     private final BrowserWindowsSteps browserWindowsSteps = new BrowserWindowsSteps();

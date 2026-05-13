@@ -1,5 +1,6 @@
 package reqres.api.tests.StepsProductTest;
 
+import config.api.RestApiSpecifications;
 import io.qameta.allure.Step;
 import reqres.api.pojo.ProductPojo;
 
@@ -12,7 +13,7 @@ import static io.restassured.RestAssured.given;
 public class ProductSteps {
     @Step("Получение списка товаров")
     public List<ProductPojo> getProducts(){
-        return given()
+        return given().spec(RestApiSpecifications.requestSpec())
                 .when().get("products")
                 .then().extract().jsonPath().getList("data", ProductPojo.class);
     }

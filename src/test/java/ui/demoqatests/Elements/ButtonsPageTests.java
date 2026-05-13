@@ -11,6 +11,7 @@ import ui.Steps.demoqa.Elements.ButtonsPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("buttons_page_ui_test")
+@Tag("ui")
 @Owner("Ilya Koltov")
 @DisplayName("[UI] тестирование страницы кнопок")
 public class ButtonsPageTests {

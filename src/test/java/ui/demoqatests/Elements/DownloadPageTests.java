@@ -13,6 +13,7 @@ import ui.Steps.demoqa.Elements.DownloadPageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("upload_download_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Тестирование скачивание и закачку файла на сайт")
 @Epic("загрузка и скачивание файлов")
 public class DownloadPageTests extends BaseTest {

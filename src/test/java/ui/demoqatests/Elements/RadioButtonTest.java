@@ -10,6 +10,7 @@ import ui.Steps.demoqa.Elements.RadioButtonSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("radiobutton_ui_test")
+@Tag("ui")
 @DisplayName("[UI] Тестирование страницы с radio кнопки")
 public class RadioButtonTest {
 

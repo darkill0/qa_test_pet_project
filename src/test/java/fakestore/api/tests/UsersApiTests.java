@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("users_api_tests")
+@Tag("fake_store_api")
 @DisplayName("[FAKE API] тестирование пользователей Fake api")
 public class UsersApiTests {
     private static UsersApiSteps usersApiSteps;

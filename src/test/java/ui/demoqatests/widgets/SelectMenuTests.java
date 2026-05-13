@@ -13,6 +13,7 @@ import ui.Steps.demoqa.widgets.SelectMenuSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("select_menu_page")
+@Tag("ui")
 @DisplayName("[UI] Проверка страницы Select Menu")
 public class SelectMenuTests extends BaseTest {
 

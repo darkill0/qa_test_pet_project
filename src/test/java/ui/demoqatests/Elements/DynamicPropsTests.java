@@ -15,6 +15,7 @@ import ui.Steps.demoqa.Elements.DynamicPropsSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("dynamic_props_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] Тестирование динамичных объектов сайта")
 @Description("Проверяем динамичные объекты")
 public class DynamicPropsTests extends BaseTest {

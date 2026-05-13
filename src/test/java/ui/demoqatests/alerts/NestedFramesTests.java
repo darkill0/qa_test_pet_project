@@ -13,6 +13,7 @@ import ui.Steps.demoqa.alerts.NestedFramesSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("nested_frame_ui_test")
+@Tag("ui")
 @DisplayName("[UI] Тестирование вложенного frame")
 public class NestedFramesTests extends BaseTest {
     private final NestedFramesSteps nestedFramesSteps = new NestedFramesSteps();

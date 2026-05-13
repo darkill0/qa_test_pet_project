@@ -36,7 +36,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-
+    maxParallelForks = Runtime.getRuntime().availableProcessors().coerceAtLeast(2)
     systemProperty(
         "allure.results.directory",
         System.getProperty(

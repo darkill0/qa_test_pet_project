@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Tag("cart_api_tests")
-@DisplayName("[API FakeStore] Тестирование корзины товаров")
+@Tag("fake_store_api")
+@DisplayName("[FAKE API] Тестирование корзины товаров")
 @Epic("Cart FakeStore Tests")
 public class CartsApiTests {
     private static  CartsApiSteps cartsSteps;

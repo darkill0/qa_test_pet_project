@@ -13,6 +13,7 @@ import ui.Steps.demoqa.Elements.TextBoxSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("textboxpage_test")
+@Tag("ui")
 @DisplayName("[UI] Тестирование страницы с textbox")
 public class TextBoxPageTests {
 

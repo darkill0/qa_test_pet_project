@@ -24,7 +24,7 @@ public class UsersSteps {
     {
         UserPojo actualFirstUser = new UserPojo(1, "george.bluth@reqres.in", "George", "Bluth", "https://reqres.in/img/faces/1-image.jpg");
 
-        UserPojo findFirstElement = given().when().get("users").then().spec(RestApiSpecifications.responseSpecOK200()).body("data", notNullValue())
+        UserPojo findFirstElement = given().spec(RestApiSpecifications.requestSpec()).when().get("users").then().spec(RestApiSpecifications.responseSpecOK200()).body("data", notNullValue())
                 .body("data[0]", notNullValue()).extract().body().jsonPath().getObject("data[0]", UserPojo.class);
 
         Assertions.assertEquals(actualFirstUser, findFirstElement);
@@ -33,7 +33,7 @@ public class UsersSteps {
     @Step("Проверка что ссылка аватара содержит Id")
     public void checkUsersAvatarsContainsIdUser()
     {
-        List<UserPojo> users = given().
+        List<UserPojo> users = given().spec(RestApiSpecifications.requestSpec()).
                 when()
                 .get("users")
                 .then().spec(RestApiSpecifications.responseSpecOK200()).log().all().extract().body().jsonPath().getList("data", UserPojo.class);
@@ -44,7 +44,7 @@ public class UsersSteps {
 
     @Step("Проверка окончания email на @reqres.in")
     public void checkUsersMailLastSuffix() {
-        List<String> usersEmails = given()
+        List<String> usersEmails = given().spec(RestApiSpecifications.requestSpec())
                 .when()
                 .get("users")
                 .then().spec(RestApiSpecifications.responseSpecOK200()).extract().body().jsonPath().getList("data", UserPojo.class).stream().map(UserPojo::getEmail).toList();
@@ -56,7 +56,7 @@ public class UsersSteps {
     @Step("Проверка количество элементов на странице соотвествует колечство в data. data.size k per_page")
     public void checkDataSizeEqualPerPageSize()
     {
-        var json = given()
+        var json = given().spec(RestApiSpecifications.requestSpec())
                 .when()
                 .get("users")
                 .then().spec(RestApiSpecifications.responseSpecOK200()).extract().jsonPath();
@@ -68,14 +68,14 @@ public class UsersSteps {
     @Step("Тестирование получения несуществующего пользователя")
     public void checkGetUnknownUser()
     {
-        given().when().get("users/1000").then().spec(RestApiSpecifications.responseSpecCustom(404)).log().all();
+        given().spec(RestApiSpecifications.requestSpec()).when().get("users/1000").then().spec(RestApiSpecifications.responseSpecCustom(404)).log().all();
     }
 
     @Step("Удаление пользователя и проверка statusCode 204")
     @Attachment(value = "Response", type = "application/json")
     public void deleteUserById()
     {
-        response = given()
+        response = given().spec(RestApiSpecifications.requestSpec())
                 .when().delete("users/2")
                 .then().spec(RestApiSpecifications.responseSpecCustom(204)).extract().response();
     }
@@ -89,7 +89,7 @@ public class UsersSteps {
     @Step("Проверка обновления пользователя {name, job}")
     public void updateUserById(HashMap<String, String> newUser)
     {
-        response = given().body(newUser)
+        response = given().spec(RestApiSpecifications.requestSpec()).body(newUser)
                 .when().put("users/2")
                 .then().spec(RestApiSpecifications.responseSpecOK200())
                 .extract().response();
@@ -107,7 +107,7 @@ public class UsersSteps {
     @Step("Успешная регистрация. Проверка на создание пользователя")
     public void checkRegisterUser(RegisterPojo newUser)
     {
-        response = given().body(newUser)
+        response = given().spec(RestApiSpecifications.requestSpec()).body(newUser)
                 .when().post("register")
                 .then().spec(RestApiSpecifications.responseSpecOK200()).extract().response();
     }
@@ -115,7 +115,7 @@ public class UsersSteps {
     @Step("Неуспешная регистрация. Проверка передача данных без email")
     public void checkFailedRegisterUser(RegisterPojo newUser)
     {
-        given().body(newUser)
+        given().spec(RestApiSpecifications.requestSpec()).body(newUser)
                 .when().post("register")
                 .then().spec(RestApiSpecifications.responseSpecCustom(400)).body("error", equalTo("Missing email or username"));
     }
@@ -123,7 +123,7 @@ public class UsersSteps {
     @Step("Неуспешная регистрация. Проверка передача данных без password")
     public void checkFailedRegisterUserWithoutPassword(RegisterPojo newUser)
     {
-        given().body(newUser)
+        given().spec(RestApiSpecifications.requestSpec()).body(newUser)
                 .when().post("register")
                 .then().spec(RestApiSpecifications.responseSpecCustom(400)).body("error", equalTo("Missing password"));
     }
@@ -131,7 +131,7 @@ public class UsersSteps {
     @Step("Неуспешная регистрация. Проверка передача данных без password")
     public void checkFailedRegisterNotExistedUser(RegisterPojo newUser)
     {
-        given().body(newUser)
+        given().spec(RestApiSpecifications.requestSpec()).body(newUser)
                 .when().post("register")
                 .then().spec(RestApiSpecifications.responseSpecCustom(400)).body("error", equalTo("Note: Only defined users succeed registration"));
     }
@@ -147,28 +147,28 @@ public class UsersSteps {
 
     @Step("Успешный вход в систему")
     public void checkLogin(RegisterPojo loginData){
-        given().body(loginData)
+        given().spec(RestApiSpecifications.requestSpec()).body(loginData)
                 .when().post("login")
                 .then().spec(RestApiSpecifications.responseSpecOK200()).body("token", equalTo("QpwL5tke4Pnpja7X4"));
     }
 
     @Step("Неуспешный вход в систему. Нет логина")
     public void checkFailedLoginNoEmail(RegisterPojo loginData){
-        given().body(loginData)
+        given().spec(RestApiSpecifications.requestSpec()).body(loginData)
                 .when().post("login")
                 .then().spec(RestApiSpecifications.responseSpecCustom(400)).body("error", equalTo("Missing email or username"));
     }
 
     @Step("Неуспешный вход в систему. Нет пароля")
     public void checkFailedLoginNoPassword(RegisterPojo loginData){
-        given().body(loginData)
+        given().spec(RestApiSpecifications.requestSpec()).body(loginData)
                 .when().post("login")
                 .then().spec(RestApiSpecifications.responseSpecCustom(400)).body("error", equalTo("Missing password"));
     }
 
     @Step("Неуспешный вход в систему. Вход под несуществующем пользователем")
     public void checkFailedLoginNoExistUser(RegisterPojo loginData){
-        given().body(loginData)
+        given().spec(RestApiSpecifications.requestSpec()).body(loginData)
                 .when().post("login")
                 .then().spec(RestApiSpecifications.responseSpecCustom(400)).body("error", equalTo("user not found"));
     }

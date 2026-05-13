@@ -11,6 +11,7 @@ import ui.Steps.demoqa.bookstore.ProfilePageSteps;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Tag("profile_ui_tests")
+@Tag("ui")
 @DisplayName("[UI] тестирование bookstore")
 public class ProfilePageTests extends BaseTest {
     private static ProfilePageSteps profilePageSteps;
