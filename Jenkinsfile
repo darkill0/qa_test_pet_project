@@ -82,16 +82,21 @@ pipeline {
 
                         echo "Running tag: ${currentTag}"
 
-                        sh """
-                            chmod +x gradlew
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
 
-                            ./gradlew clean test \
-                            -Dtag=${currentTag} \
-                            --stacktrace \
-                            --info \
-                            --no-daemon \
-                            -Dallure.results.directory=build/allure-results/${currentTag}
-                        """
+                            sh """
+                                chmod +x gradlew
+
+                                mkdir -p build/allure-results/${currentTag}
+
+                                ./gradlew test \
+                                -Dtag=${currentTag} \
+                                --stacktrace \
+                                --info \
+                                --no-daemon \
+                                -Dallure.results.directory=build/allure-results/${currentTag}
+                            """
+                        }
                     }
                 }
             }
@@ -127,9 +132,21 @@ pipeline {
         always {
 
             archiveArtifacts(
-                    artifacts: 'build/allure-results/**/*',
+                    artifacts: '''
+                        build/allure-results/**/*
+                    ''',
                     allowEmptyArchive: true
             )
+
+            junit(
+                    testResults: 'build/test-results/test/*.xml',
+                    allowEmptyResults: true
+            )
+        }
+
+        unstable {
+
+            echo 'Some tests failed, build marked as UNSTABLE'
         }
 
         failure {
