@@ -9,7 +9,12 @@ public class TestConfig {
     public static void setup()
     {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
+        options.addArguments(
+                "--headless=new",
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--window-size=1920,1080"
+        );
         String remote = EnvConfig.getRemote();
         if(remote != null && !remote.isEmpty()){
             Configuration.remote = remote;
