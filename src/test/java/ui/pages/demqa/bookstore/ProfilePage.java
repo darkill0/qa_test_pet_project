@@ -147,9 +147,11 @@ public class ProfilePage extends BasePage {
                 .shouldBe(visible, enabled)
                 .scrollIntoView("{block: 'center'}");
 
-        deleteButton.click();
+        deleteButton.shouldBe(visible, enabled)
+                .scrollIntoView(true).click();
 
         $("#closeSmallModal-ok")
+                .should(appear)
                 .shouldBe(visible, enabled)
                 .click();
 
